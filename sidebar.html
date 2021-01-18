@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Sans+Pro:300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="browser-dictionary">
+    <div class="overview">
+      <h2>Your Selected Text</h2>
+      <h1><span class="selected-text" id="selected-text">No text selected</span></h1>
+      <button class="get-meaning-button" onclick="processSelection()">Get Selection</button>
+    </div>
+    <div class="progress">
+      <div class="bar" id="bar" style="width: 0%;"></div>
+    </div>
+    <div class="word-meaning" id="screen" style="display: none;">
+      <h1 id="screen-word">Prodigal</h1>
+      <h3 id="screen-phonetic">/ˈprɒdɪɡ(ə)l/</h3>
+      <div id="meaning-container">
+        <div class="meanings">
+          <h2 class="kind">adjective</h2>
+          <ol class="meaning">
+            <li>
+              <div class="content">
+                spending money or using resources freely and recklessly; wastefully extravagant.
+                "prodigal habits die hard"
+              </div>
+              <div class="extras"></div>
+            </li>
+            <li>
+              <div class="content">
+                having or giving something on a lavish scale.
+                "the dessert was prodigal with whipped cream"
+              </div>
+              <div class="extras"></div>
+            </li>
+          </ol>
+        </div>
+        <div class="meanings">
+          <h2 class="kind">adjective</h2>
+          <ol class="meaning">
+            <li>
+              <div class="content">
+                spending money or using resources freely and recklessly; wastefully extravagant.
+                "prodigal habits die hard"
+              </div>
+              <div class="extras"></div>
+            </li>
+            <li>
+              <div class="content">
+                having or giving something on a lavish scale.
+                "the dessert was prodigal with whipped cream"
+              </div>
+              <div class="extras"></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 10px;
+      --theme: #2035ca;
+    }
+
+    .get-meaning-button {
+      font-family: 'Raleway', sans-serif;
+      background-color: #60b6f0;
+      padding: .5rem 1rem;
+      border-radius: 2px;
+      margin: 1rem 0;
+      color: #FFF;
+      border: none;
+    }
+
+    .browser-dictionary {
+      width: 100%;
+      height: 100%;
+      /* bottom: 100px;
+      right: 20px; */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 40px;
+    }
+
+    .overview {
+      /* background: rgba(0, 0, 0, 0) linear-gradient(135deg, #95d4cb 0%, rgb(149, 208, 212) 100%) repeat scroll 0% 0%; */
+      padding: 1.75rem 4rem;
+    }
+
+    .overview h1 {
+      font-size: 1.5rem;
+      font-family: sans-serif;
+      font-weight: 100;
+      color: #9B9B9B;
+      margin-bottom: .5rem;
+      font-style: italic;
+      text-transform: lowercase;
+      -moz-user-select: none;
+      margin: .3rem 0;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .selected-text {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      flex: 1 1 auto;
+    }
+
+    .selected-text span {
+      line-height: 2.1rem;
+      border-bottom: 2.5px dotted #9B9B9B;
+      margin-right: .5rem;
+      padding: 0 .1rem;
+      cursor: pointer;
+    }
+
+    .selected-text span:hover {
+      color: rgb(100, 205, 237);
+      border-bottom-color: rgba(100, 205, 237, .75);
+      border-bottom-style: solid;
+    }
+
+    /* .selected-text::before, .selected-text::after {
+      content: "\"";
+    } */
+
+    .overview h1 .loaded {
+      border-bottom-style: solid;
+      border-bottom-color: #86CBA6;
+    }
+
+    .overview h2 {
+      letter-spacing: .65px;
+      font-family: sans-serif;
+      color: #1E1E1E;
+      font-weight: 400;
+      font-size: 1.35rem;
+    }
+
+    .progress {
+      height: .3rem;
+      width: 100%;
+      background-color: goldenrod;
+    }
+
+    .progress .bar {
+      height: 100%;
+      background-color: gold;
+      transition: .5s ease;
+    }
+  </style>
+  <style>
+    .word-meaning {
+      padding: 2rem 4rem;
+      text-rendering: optimizeLegibility;
+      overflow-y: scroll;
+    }
+
+    .word-meaning h1 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 100;
+      font-size: 2rem;
+      text-transform: lowercase;
+    }
+
+    .word-meaning h3 {
+      font-size: 1.6rem;
+      color: #70757A;
+      font-family: sans-serif;
+      font-weight: 100;
+      text-transform: lowercase;
+    }
+
+    .meanings {
+      margin: 1rem 0;
+    }
+
+    .meanings:first-of-type {
+      margin: 2.5rem 0;
+    }
+
+    .kind {
+      font-size: 1.45rem;
+      font-family: sans-serif;
+      font-style: italic;
+      font-weight: 100;
+    }
+
+    .meaning {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .meaning li {
+      margin: 1rem 0;
+    }
+
+    .meaning li div:last-of-type {
+      color: #878787 !important;
+      font-size: 1.4rem;
+    }
+  </style>
+  <script>
+    const apiURI = 'https://api.dictionaryapi.dev/api/v1/entries/en/';
+    let words = [];
+    let percent = 0;
+    let responses = 0;
+
+    function getSelectionText(text) {
+      return text.trim().replace(/[^a-zA-Z ]/g, '');
+    }
+
+    function setProgress() {
+      const percentile = 100 / words.length;
+      const progressBar = document.querySelector('#bar');
+
+      percent += percentile;
+
+      if (percent == 100) {
+        console.log(responses, words.length)
+        if (responses == words.length) {
+          progressBar.setAttribute('style', `background-color: green; width: 100%`);
+          showMeaningOnScreen(0);
+        } else if (responses > 0) {
+          progressBar.setAttribute('style', `background-color: #daa520; width: 100%`);
+          showMeaningOnScreen(0);
+        } else {
+          progressBar.setAttribute('style', `background-color: red; width: 100%`);
+        }
+        percent = 0;
+        responses = 0;
+      } else {
+        progressBar.setAttribute('style', `width: ${percent}%`);
+      }
+    }
+
+    function getMeaning(span) {
+      fetch(`${apiURI}/${span.word}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data['title'] && data['title'] == 'Word not found') {
+            span['success'] = false;
+          } else {
+            span.spanDOM.setAttribute('class', 'loaded');
+            span['success'] = true;
+            responses++;
+            span['meaningObject'] = data[0];
+          }
+          setProgress();
+        });
+    }
+
+    function updateSelectedTextinDOM(selectedText) {
+      const selectedTextDOM = document.querySelector('#selected-text');
+      selectedTextDOM.innerHTML = '';
+      words = selectedText.split(" ");
+      let wordIndex = 0;
+      words = words.map(word => {
+        const spanDOM = document.createElement('span');
+        spanDOM.setAttribute('onclick', `showMeaningOnScreen(${wordIndex++})`);
+        spanDOM.innerHTML = word;
+        return { spanDOM, word };
+      });
+      words.forEach(span => {
+        selectedTextDOM.appendChild(span.spanDOM);
+      });
+    }
+
+    function showMeaningOnScreen(wordIndex) {
+      // console.log(words[wordIndex]);
+      const screen = document.querySelector('#screen');
+      screen.setAttribute('style', 'display: none;');
+
+      const screenWord = document.querySelector('#screen-word');
+      const screenPhonetic = document.querySelector('#screen-phonetic');
+
+      screenWord.innerHTML = words[wordIndex].meaningObject.word;
+      screenPhonetic.innerHTML = words[wordIndex].meaningObject.phonetic;
+
+      const meaningContainer = document.querySelector('#meaning-container');
+      meaningContainer.innerHTML = '';
+      Object.keys(words[wordIndex].meaningObject.meaning).forEach(partOfGrammar => {
+        createMeaningsContainer(partOfGrammar, words[wordIndex].meaningObject.meaning[partOfGrammar]);
+      });
+
+      function createMeaningsContainer(kind, meaningsArray) {
+        const meaningsEl = document.createElement('div');
+        meaningsEl.setAttribute('class', 'meanings');
+
+        const h2 = document.createElement('h2');
+        h2.setAttribute('class', 'kind');
+        h2.innerHTML = kind;
+        meaningsEl.appendChild(h2);
+
+        const ol = document.createElement('ol');
+        ol.setAttribute('class', 'meaning');
+
+        meaningsArray.forEach(meaning => {
+          const li = document.createElement('li');
+
+          const span1 = document.createElement('div');
+          span1.innerHTML = meaning.definition;
+          const span2 = document.createElement('div');
+          if (meaning.example) span2.innerHTML = `"${meaning.example}"`;
+
+          li.appendChild(span1);
+          li.appendChild(span2);
+          ol.appendChild(li);
+        });
+
+        meaningsEl.appendChild(ol);
+        meaningContainer.appendChild(meaningsEl);
+      }
+      // screenPhonetic.innerHTML = words[wordIndex].meaningObject.phonetic;
+
+      screen.setAttribute('style', 'display: block;');
+    }
+
+    function runUI(selectedText) {
+      // Check if selected text is valid
+      selectedText = getSelectionText(selectedText)
+      if (!selectedText) {
+        console.log('The selected text is empty');
+        return;
+      }
+
+      updateSelectedTextinDOM(selectedText);
+      words.forEach(span => {
+        getMeaning(span);
+      });
+    }
+
+    function processSelection() {
+      google.script.run.withSuccessHandler(runUI).fetchWord();
+    }
+
+    document.body.onload = () => {
+      console.log('Document is now loaded.')
+    }
+  </script>
+</body>
+
+</html>
